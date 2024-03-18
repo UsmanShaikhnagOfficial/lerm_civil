@@ -113,7 +113,7 @@
 								<span t-esc="r['crushing_load']"/>
 							</td>
                             <td colspan="3">
-								<span t-esc="r['compressive_strength']"/>
+								<span t-esc="r['compressive_strength']"  t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							
 							

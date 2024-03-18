@@ -72,7 +72,7 @@
                             <field name="alkali_aggregate_dissolved_visible" invisible="1"/>
                         </h1>
                     </group>
-                    <group attrs="{'invisible': [('alkali_aggregate_dissolved_visible', '=', False)]}">
+                    <group attrs="{'invisible': [('alkali_aggregate_dissolved_visible', '=', False)]}" style="white-space:nowrap; width:50%">
                         <field name="wt_blank_crucible_after_ignition"/>
                         <field name="wt_blank_crucible_after_hf"/>
                         <field name="diff_in_wt_of_silica_blank"/>
@@ -285,7 +285,7 @@
                             <field name="chloride_visible" invisible="1"/>
                         </h1>
                     </group>
-                    <group attrs="{'invisible': [('chloride_visible', '=', False)]}">
+                    <group attrs="{'invisible': [('chloride_visible', '=', False)]}" style="white-space:nowrap; width:50%">
                       <field name="sample_wt_chloride"/>
                       <field name="volume_make_upto_chloride"/>
                       <field name="aliqote_taken_chloride"/>
@@ -314,7 +314,7 @@
                         </h1>
                     </group>
 
-                    <group attrs="{'invisible': [('sulphate_visible', '=', False)]}">
+                    <group attrs="{'invisible': [('sulphate_visible', '=', False)]}" style="white-space:nowrap; width:50%">
                       <field name="sample_wt_sulphate"/>
                       <field name="volume_make_upto_sulphate"/>
                       <field name="aliqote_taken_sulphate"/>
@@ -340,7 +340,7 @@
                         </h1>
                     </group>
 
-                    <group attrs="{'invisible': [('na2O_name_visible', '=', False)]}">
+                    <group attrs="{'invisible': [('na2O_name_visible', '=', False)]}" style="white-space:nowrap; width:50%">
                       <field name="sample_wt_na2O"/>
                       <field name="dilution_na2O"/>
                       <field name="sidium_reading_na2O"/>
@@ -368,7 +368,7 @@
                         </h1>
                     </group>
 
-                    <group attrs="{'invisible': [('k2O_name_visible', '=', False)]}">
+                    <group attrs="{'invisible': [('k2O_name_visible', '=', False)]}" style="white-space:nowrap; width:50%">
                       <field name="sample_wt_k2O"/>
                       <field name="dilution_k2O"/>
                       <field name="sidium_reading_k2O"/>

@@ -285,7 +285,7 @@
                             <field name="chloride_visible" invisible="1"/>
                         </h1>
                     </group>
-                    <group attrs="{'invisible': [('chloride_visible', '=', False)]}">
+                    <group attrs="{'invisible': [('chloride_visible', '=', False)]}" style="white-space:nowrap; width:50%">
                       <field name="sample_wt_chloride"/>
                       <field name="volume_make_upto_chloride"/>
                       <field name="aliqote_taken_chloride"/>
@@ -314,7 +314,7 @@
                         </h1>
                     </group>
 
-                    <group attrs="{'invisible': [('sulphate_visible', '=', False)]}">
+                    <group attrs="{'invisible': [('sulphate_visible', '=', False)]}" style="white-space:nowrap; width:50%">
                       <field name="sample_wt_sulphate"/>
                       <field name="volume_make_upto_sulphate"/>
                       <field name="aliqote_taken_sulphate"/>
