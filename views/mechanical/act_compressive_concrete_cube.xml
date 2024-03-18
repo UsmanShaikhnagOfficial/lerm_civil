@@ -8,35 +8,46 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
-                     <group>
-                                <group>
-                                  <field name='eln_ref' readonly="1"/>
-                                </group>
-                             
-                                <group>
-                                    <field name='grade'/>
-                                </group>
-                                <group>
-                                    <field name='size'/>
-                                </group>
-                                
-                                
-                            </group>
-                            <group>
-                                <field name="sample_parameters">
-                                    <tree>
-                                        <field name="parameter_name"/>
-                                        <field name="test_method"/>
-                                    </tree>
-                                </field>
-                            </group>
+                    <group>
+                        <field name="srf_id" invisible="1"/>
+                        <field name="sample_id" readonly="1" />
+                        <field name="parameter_id" invisible="1"/>
+                        <field name="eln_ref" readonly="1"/>
+                        <field name="grade" exception="grade"  string="Grade" identity="extra"/>   
+                    </group>
+                        <group>
+                            <field name="sample_parameters">
+                                <tree>
+                                    <field name="parameter_name"/>
+                                    <field name="test_method"/>
+                                </tree>
+                            </field>
+                        </group>
                     <group>
                         <h1>
                             <field name="name" readonly="1" nolabel="1"/>
                         </h1>
                     </group>
+                     <group>
+                        <group>
+                            <field name="date_of_casting"  string="Date of Casting" identity="extra"/>
+                        </group>
+                        <group>
+                            <field name="date_of_testing"  string="Date of Testing" identity="extra"/>
+                        </group>
+                        <group>
+                            <field name="age_of_days"/>
+                        </group>
+                        <group>
+                            <field name="age_of_test"/>
+                        </group>
+                        <group>
+                            <field name="difference"/>
+                        </group>
+                        
+                    </group>
                     <field name="child_lines" nolabel="1" >
-                            <tree editable="bottom">
+                            <tree >
                                 <field name='sr_no'/>
                                 <field name='length'/>
                                 <field name='width'/>
@@ -65,6 +76,30 @@
                             string="Submit"
                             />
                 </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="mechanical_concrete_act_line_view" model="ir.ui.view">
+        <field name="name">mechanical.act.compressive.line.form</field>
+        <field name="model">mechanical.act.compressive.line</field>
+        <field name="arch" type="xml">
+            <form>
+            <group>
+            <group>
+            <field name='sr_no' string="Sr. NO"/>
+                <field name='id_mark' string="ID Mark/Location"/>
+                <field name='length' string="Length (mm)"/>
+                <field name='width' string="Width (mm)"/>
+                <field name='area' string="Area (mm²)"/>
+            </group>
+            <group>
+                <field name='weight_sample' string="Weight of Sample in kg"/>
+                <field name="crushing_load" string="Crushing Load in kN"/>
+                <field name='compressive_strength' string="Compressive Strength N/mm²"/>
+                <field name="parent_id" invisible="1"/>
+            </group>
+            </group>
+                
             </form>
         </field>
     </record>

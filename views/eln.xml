@@ -259,12 +259,12 @@
             <field name="arch" type="xml">
                 <tree default_order='create_date desc' create="false">
                     <!-- <field name='eln_id' optional="show"/> -->
+                    <field name='kes_no' optional="show"/>
                     <field name='eln_id' optional="show"/>
                     <field name='srf_id' optional="show"/>
                     <field name='sample_id' optional="show"/>
                     <field name='technician' optional="show"/>
                     <field name='srf_date' optional="show"/>
-                    <field name='kes_no' optional="show"/>
                     <field name='discipline' optional="show"/>
                      <!-- <field name='lab_l_id' optional="show"/> -->
                     <field name='lab_no_value' optional="show" invisible="1"/>

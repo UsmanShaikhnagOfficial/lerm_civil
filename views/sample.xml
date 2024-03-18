@@ -179,10 +179,10 @@
                           <field name="approveby_signature_required" attrs="{'invisible': [('state', 'not in', ('4-in_report'))]}"/>
 
                       </group>
-                      <group>
+                      <group attrs="{'invisible': [('state', 'not in', ('4-in_report'))]}">
                         <field name="page_break" />
-                        <field name="invoice_status" attrs="{'invisible': [('state', 'not in', ('4-in_report'))]}"/>
-                        <field name="invoice_number" attrs="{'invisible': [('state', '!=', '4-in_report'), ('invoice_status', '!=', '2-invoiced')]}"/>
+                        <field name="invoice_status" />
+                        <field name="invoice_number" attrs="{'invisible': [('invoice_status', '!=', '2-invoiced')]}"/>
                       </group>
                     </group>  
 
@@ -253,6 +253,17 @@
                                             </li>
 
                                         </ul>
+                                        <ul attrs="{'invisible': [('state', 'not in', ('4-in_report'))]}">
+                                            <li>
+                                                <b>Invoice Status :</b>
+                                                <field name="invoice_status"/>
+                                            </li>
+                                            <li attrs="{'invisible': [('invoice_status', '!=', '2-invoiced')]}">
+                                                <b>Invoice Number :</b>
+                                                <field name="invoice_number"/>
+                                            </li>
+
+                                        </ul>
                                         <ul>
                                             <li>
                                              <span style="color:Green;">
@@ -265,6 +276,14 @@
                                             <li>
                                              <span>
                                                 <field name="activity_ids" widget="kanban_activity"/>
+                                            </span>
+                                            </li>
+                                        </ul>
+                                        <ul invisible="1">
+                                            <li>
+                                             <span>
+                                                <field  name="state"/>
+
                                             </span>
                                             </li>
                                         </ul>
@@ -291,8 +310,8 @@
                     <button type="object" class="oe_highlight" name="open_sample_allotment_wizard"  string="Bulk Allotment" />
                     <button type="object" class="oe_highlight" name="reallocate_sample"  string="ReAllotment" />
                 </header>
-                      <field name="sample_received_date" optional="show"/>
                       <field name='kes_no' width="400px"/>
+                      <field name="sample_received_date" optional="show"/>
                       <field name="srf_id" optional="show" />
                       <field name="client_reference1" optional="show" />
                       <field name="activity_ids" widget="list_activity" optional="show"/>
@@ -318,6 +337,9 @@
                       <field name="scope" optional="show"/>
                       <field name="sample_description" optional="show"/>
                       <field name="state" widget="badge" optional="show"/>
+                      <field name="invoice_status" optional="show"/>
+                      <field name="invoice_number" optional="show"/>
+
 
             </tree>
         </field>
