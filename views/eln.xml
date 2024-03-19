@@ -359,6 +359,8 @@
                 <group>
                     <field name="parameter"/>
                     <field name="time_based" invisible="1"/>
+                    <field name="eln_state" invisible="1"/>
+                    <field name="result_editable" invisible="1"/>
                 </group>
                 <notebook>
                     <page string="Input Lines">
@@ -386,7 +388,7 @@
 
                 </notebook>
                 <footer>
-                    <button name="update_result" string="Update" type="object" class="btn-primary"/>
+                    <button name="update_result" string="Update" type="object" class="btn-primary" attrs="{'invisible':[('result_editable', '!=', True)]}"/>
                 </footer>
             </form>
         </field>

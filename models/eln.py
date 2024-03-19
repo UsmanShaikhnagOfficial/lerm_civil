@@ -631,6 +631,33 @@ class ParameteResultCalculationWizard(models.TransientModel):
     ],compute="compute_conformity_status",string='Conformity Status')
     result = fields.Float(string="Result",compute="compute_result",digits=(16, 5))
     # result_char = fields.Char(string="Result")
+    eln_state = fields.Selection([
+        ('1-draft', 'In-Test'),
+        ('2-confirm', 'In-Check'),
+        ('3-approved','Approved'),
+        ('4-rejected','Rejected')
+    ], string='State',default='1-draft')
+    result_editable = fields.Boolean("Editable",default=True)
+
+    @api.onchange('parameter')
+    def _compute_eln_state(self):
+        state = self.env["lerm.eln"].sudo().search([('id','=',self.env.context.get('eln_id'))]).state
+        # import wdb;wdb.set_trace()
+        if state:
+            self.eln_state = state
+        else:
+            self.eln_state = '1-draft'
+
+    @api.onchange('parameter')
+    def _compute_result_editable(self):
+        state = self.eln_state
+        current_user_groups = self.env.user.groups_id.ids
+        hod_group_id = self.env.ref('lerm_civil.kes_hod_access_group').id
+
+        if state != '1-draft' and hod_group_id not in current_user_groups:
+            self.result_editable = False
+        else:
+            self.result_editable = True
 
     @api.depends('parameter')
     def compute_is_time(self):

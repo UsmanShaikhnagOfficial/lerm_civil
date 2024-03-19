@@ -259,16 +259,16 @@ class GsbReport(models.AbstractModel):
 
       
         # Prepare data for the chart
-        
         plt.figure(figsize=(12, 6))
         cbrx_values = []
         cbry_values = []
-        for line in general_data.cbr_table:
-            cbrx_values.append(line.penetration)
-            cbry_values.append(line.load)
-        
+
         if general_data.cbr_table:
-        # Perform cubic spline interpolation
+            for line in general_data.cbr_table:
+                cbrx_values.append(line.penetration)
+                cbry_values.append(line.load)
+            
+            # Perform cubic spline interpolation
             cbrx_smooth = np.linspace(min(cbrx_values), max(cbrx_values), 1000)
             cbrcs = CubicSpline(cbrx_values, cbry_values)
 
@@ -277,8 +277,8 @@ class GsbReport(models.AbstractModel):
             plt.scatter(cbrx_values, cbry_values, marker='o', color='blue', s=30, label='Data Points')
 
             # Add a horizontal line with a label
-            plt.axhline(y=cbry_values[5], color='green', linestyle='--' , label=f'Load at 2.5 mm = {cbry_values[5]}')
-            plt.axhline(y=cbry_values[8], color='green', linestyle='--' , label=f'Load at 5 mm = {cbry_values[8]}')
+            plt.axhline(y=cbry_values[5], color='green', linestyle='--', label=f'Load at 2.5 mm = {cbry_values[5]}')
+            plt.axhline(y=cbry_values[8], color='green', linestyle='--', label=f'Load at 5 mm = {cbry_values[8]}')
 
             # Add a vertical line with a label
             plt.axvline(x=2.5, color='orange', linestyle='--')
@@ -293,8 +293,8 @@ class GsbReport(models.AbstractModel):
             ax.xaxis.set_minor_locator(ticker.MultipleLocator(0.1))  # Minor gridlines every 0.1 unit
 
             # Set the y-axis tick marks
-            plt.xticks(range(0 , 15 , 1))
-            plt.yticks(range(0 , 481 , 50))
+            plt.xticks(range(0, 15, 1))
+            plt.yticks(range(0, 481, 50))
             
             plt.xlabel('Penetration in mm')
             plt.ylabel('Load')
@@ -306,7 +306,10 @@ class GsbReport(models.AbstractModel):
             plt.savefig(buffer2, format='png')
             cbr_graph_image = base64.b64encode(buffer2.getvalue()).decode('utf-8')
             plt.close()
-        
+        else:
+            cbr_graph_image = None
+            cbry_values = []  # Set to an empty list instead of 0
+
         return {
             'eln': eln,
             'data' : general_data,
@@ -317,10 +320,76 @@ class GsbReport(models.AbstractModel):
             'mdd' : max_y,
             'omc' : max_x,
             'graphCbr' : cbr_graph_image,
-            'load2' : cbry_values[5],
-            'load5' : cbry_values[8],
-            
+            'load2' : cbry_values[5] if cbry_values else 0,  # Access the index if cbry_values is not empty
+            'load5' : cbry_values[8] if cbry_values else 0,
         }
+        
+        # plt.figure(figsize=(12, 6))
+        # cbrx_values = []
+        # cbry_values = []
+        # for line in general_data.cbr_table:
+        #     cbrx_values.append(line.penetration)
+        #     cbry_values.append(line.load)
+        
+        # if general_data.cbr_table:
+        # # Perform cubic spline interpolation
+        #     cbrx_smooth = np.linspace(min(cbrx_values), max(cbrx_values), 1000)
+        #     cbrcs = CubicSpline(cbrx_values, cbry_values)
+
+        #     # Create the line chart with a connected smooth line and markers
+        #     plt.plot(cbrx_smooth, cbrcs(cbrx_smooth), color='red', label='Smooth Curve')
+        #     plt.scatter(cbrx_values, cbry_values, marker='o', color='blue', s=30, label='Data Points')
+
+        #     # Add a horizontal line with a label
+        #     plt.axhline(y=cbry_values[5], color='green', linestyle='--' , label=f'Load at 2.5 mm = {cbry_values[5]}')
+        #     plt.axhline(y=cbry_values[8], color='green', linestyle='--' , label=f'Load at 5 mm = {cbry_values[8]}')
+
+        #     # Add a vertical line with a label
+        #     plt.axvline(x=2.5, color='orange', linestyle='--')
+        #     plt.axvline(x=5.0, color='orange', linestyle='--')
+            
+        #     # Set the grid
+        #     ax = plt.gca()
+        #     ax.grid(which='both', linestyle='--', linewidth=0.5)
+
+        #     # Set the x-axis major and minor tick marks
+        #     ax.xaxis.set_major_locator(ticker.MultipleLocator(1))  # Major gridlines every 1 unit
+        #     ax.xaxis.set_minor_locator(ticker.MultipleLocator(0.1))  # Minor gridlines every 0.1 unit
+
+        #     # Set the y-axis tick marks
+        #     plt.xticks(range(0 , 15 , 1))
+        #     plt.yticks(range(0 , 481 , 50))
+            
+        #     plt.xlabel('Penetration in mm')
+        #     plt.ylabel('Load')
+        #     plt.title('Penetration in mm vs Load')
+        #     plt.legend()
+
+        #     # Save the Matplotlib plot to a BytesIO object
+        #     buffer2 = BytesIO()
+        #     plt.savefig(buffer2, format='png')
+        #     cbr_graph_image = base64.b64encode(buffer2.getvalue()).decode('utf-8')
+        #     plt.close()
+        # else:
+        #     cbr_graph_image = None
+        #     cbrx_values = 0
+        #     cbry_values = 0
+            
+        
+        # return {
+        #     'eln': eln,
+        #     'data' : general_data,
+        #     'qrcode': qr_code,
+        #     'stamp' : inreport_value,
+        #     'nabl' : nabl,
+        #     'graphHeavy' : graph_image,
+        #     'mdd' : max_y,
+        #     'omc' : max_x,
+        #     'graphCbr' : cbr_graph_image,
+        #     'load2' : cbry_values[5],
+        #     'load5' : cbry_values[8],
+            
+        # }
 
 class GsbDatasheet(models.AbstractModel):
     _name = 'report.lerm_civil.gsb_mech_datasheet'

@@ -131,12 +131,75 @@
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.material.name"/>
 								</td>
-								<td colspan="6">Job Ref No :
+								<!-- <td colspan="6">Job Ref No :
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.kes_no"/>
-								</td>
+								</td> -->
 							</tr>
 						</table>
+					</div>
+
+					<div t-if="data.dry_gradation_visible" style="margin-top:20px">
+						<div style="text-align:center;font-size:18px">
+							Sieve Analysis
+						</div>
+						<table t-if="data.dry_gradation_visible">
+							<tr cols="12">
+                                <td colspan="2">IS Sieve Size
+								</td>
+                                <td colspan="2">Percentage of Passing (in %) observed				
+								</td>
+								<td colspan="2">Requirements as per
+								 <span>
+								 	<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','64fecdf5-6741-4817-95f4-5e53a0676c5f')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+											<span t-field="parameter.specification"/>
+										</t>
+                                	</t>
+								 </span>
+								</td>
+
+                            </tr>
+							<t t-set="k" t-value="0"/>
+							<tr t-foreach="data.dry_gradation_table" t-as="r" t-if="'pan' not in r['sieve_size']">
+								
+								<td colspan="2" >
+									<t t-set="k" t-value="k+1"/>
+									<span t-esc="r['sieve_size']"/>
+								</td>
+								<td colspan="2" >
+									<span t-esc="r['passing_percent']"/>
+								</td>
+								<td colspan="2" t-if="k == 1">
+										<span>100%</span>
+									</td>
+									<td colspan="2" t-if="k == 2">
+										<span>95% - 100%</span>
+									</td>
+									<td colspan="2" t-if="k == 3">
+										<span>60% - 80%</span>
+									</td>
+									<td colspan="2" t-if="k == 4">
+										<span>40% - 60%</span>
+									</td>
+									<td colspan="2" t-if="k == 5">
+										<span>25% - 40%</span>
+									</td>
+									<td colspan="2" t-if="k == 6">
+										<span>15% - 30%</span>
+									</td>
+									<td colspan="2" t-if="k == 7">
+										<span>8% - 22%</span>
+									</td>
+									<td colspan="2" t-if="k == 8">
+										<span>0% - 5%</span>
+									</td>
+									<td colspan="2" t-if="k == 9">
+										<span>0% - 5%</span>
+									</td>
+							</tr>
+						</table>
+                        
 					</div>
 
 					<table style="margin-top:15px">
@@ -168,7 +231,7 @@
 									</span>
 								</th>
 							</tr>
-							<div t-if="data.dry_gradation_visible" style="margin-top:20px">
+							<!-- <div t-if="data.dry_gradation_visible" style="margin-top:20px">
 								
 								<tr cols="12">
 									<td colspan="1">
@@ -236,11 +299,12 @@
 										<span>0% - 5%</span>
 									</td>
 									<td colspan="2" t-if="k == 9">
-										<!-- <span>0% - 5%</span> -->
+										<span>0% - 5%</span>
 									</td>
 								</tr>
-							</div>
-							<tr>
+							</div> -->
+							<t t-set="i" t-value="0"/>
+							<tr t-if="data.liquid_limit_visible">
 								<td colspan="1">
 									<div>
 										<span t-esc="i + 1" />
@@ -261,7 +325,7 @@
 									</td>
 								<td colspan="2">
 									<div>
-										<span t-field="data.remarks_liquid_limit"/>
+										<span t-field="data.liquid_limit"/>
 									</div>
 								</td>
 								<td colspan="2">
@@ -277,7 +341,7 @@
 								</td>
 							</tr>
 
-							<tr>
+							<tr t-if="data.plastic_visible">
 								<td colspan="1">
 									<div>
 										<span t-esc="i + 1" />
@@ -298,7 +362,7 @@
 									</td>
 								<td colspan="2">
 									<div>
-										<span t-field="data.remarks_plastic"/>
+										<span t-field="data.average_plastic_moisture"/>
 									</div>
 								</td>
 								<td colspan="2">
@@ -314,7 +378,7 @@
 								</td>
 							</tr>
 
-							<tr>
+							<tr t-if="data.plasticity_index_visible">
 								<td colspan="1">
 									<div>
 										<span t-esc="i + 1" />
@@ -335,7 +399,7 @@
 									</td>
 								<td colspan="2">
 									<div>
-										<span t-field="data.remarks_plastic"/>
+										<span t-field="data.plasticity_index"/>
 									</div>
 								</td>
 								<td colspan="2">
@@ -351,7 +415,7 @@
 								</td>
 							</tr>
 
-							<tr >
+							<tr t-if="data.water_absorbtion_visible">
 								<td colspan="1">
 									<div>
 										<span t-esc="i + 1" />
@@ -388,7 +452,7 @@
 								</td>
 							</tr>
 
-							<tr>
+							<tr t-if="data.abrasion_visible">
 								<td colspan="1">
 									<div>
 										<span t-esc="i + 1" />
@@ -425,7 +489,7 @@
 								</td>
 							</tr>
 
-							<tr>
+							<tr  t-if="data.impact_visible">
 								<td colspan="1">
 									<div>
 										<span t-esc="i + 1" />
@@ -462,7 +526,7 @@
 								</td>
 							</tr>
 
-							<tr>
+							<tr  t-if="data.flakiness_visible">
 								<td colspan="1">
 									<div>
 										<span t-esc="i + 1" />
@@ -499,7 +563,7 @@
 								</td>
 							</tr>
 
-							<tr>
+							<tr t-if="data.elongation_visible">
 								<td colspan="1">
 									<div>
 										<span t-esc="i + 1" />
@@ -540,8 +604,8 @@
 					
 					<div style="page-break-inside: avoid;margin-top:20px">
 
-						<table>
-							<tr>
+						<table t-if="data.density_relation_visible">
+							<tr >
 								<div style="text-align:center;letter-spacing : 2px;border:1px solid black;padding:10px">
 									<div>
 										DETERMINATION OF WATER CONTENT-DRY 
@@ -559,7 +623,7 @@
 								</div>
 							</tr>
 
-							<table style="margin-top:30px;">
+							<table  t-if="data.density_relation_visible" style="margin-top:30px;">
 							<thead>
 								<tr>
 									<th>
@@ -658,7 +722,7 @@
 							</tbody>
 						</table>
 
-							<table style="margin-top : 10px">
+							<table  t-if="data.density_relation_visible" style="margin-top : 10px">
 								<tr>
 									<td colspan="3">Weight of Mould in gm :
 									</td>
@@ -679,11 +743,11 @@
 							<img t-att-src="'data:image/png;base64,'+str(graphHeavy)" style="max-width: 100%;"/>
 					</div>
 
-					<div  style="margin-top: 10px;">
+					<div  t-if="data.density_relation_visible"  style="margin-top: 10px;">
 						From Graph 
 					</div>
 
-					<table style="margin-top: 10px;">
+					<table  t-if="data.density_relation_visible" style="margin-top: 10px;">
 						<tr>
 							<td colspan="3">MDD :</td>
 							<td colspan="3">
@@ -697,7 +761,7 @@
 					</table>	
 					
 					<div  style="page-break-inside: avoid;margin-top:20px">
-						<table>
+						<table  t-if="data.density_relation_visible">
 								<tr>
 									<div style="text-align:center;letter-spacing : 2px;border:1px solid black;padding:10px">
 										<div>
@@ -718,7 +782,7 @@
 								</tr>
 						</table>
 
-						<table style="margin-top:20px;">
+						<table t-if="data.cbr_visible" style="margin-top:20px;">
 								<thead>
 									<tr>
 										<th>
@@ -772,11 +836,11 @@
 							<img t-att-src="'data:image/png;base64,'+str(graphCbr)" style="max-width: 100%;"/>
 					</div>
 
-					<div  style="margin-top: 10px;">
+					<div t-if="data.cbr_visible"  style="margin-top: 10px;">
 						CBR From Graph 
 					</div>
 					
-					<div style="margin-top: 5px;" class="cbrformula">
+					<div t-if="data.cbr_visible"  style="margin-top: 5px;" class="cbrformula">
 
 						<div>
 							<div>
@@ -809,7 +873,7 @@
 						</div>
 					</div>
 					
-					<div  style="margin-top: 10px;">
+					<div t-if="data.cbr_visible"  style="margin-top: 10px;">
 						<b>Result: CBR at 2.5 mm Penetration is maximum hence CBR is <span t-esc="round(load2 / 1370 * 100 , 2)"/></b>
 					</div>
 
