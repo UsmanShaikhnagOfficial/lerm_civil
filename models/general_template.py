@@ -1022,8 +1022,8 @@ class SoilReport(models.AbstractModel):
             'load2': cbry_values[5] if len(cbry_values) > 5 else 0,
             'load5': cbry_values[8] if len(cbry_values) > 8 else 0,
 
-             'load2': cbry_values1[5] if len(cbry_values1) > 5 else 0,
-            'load5': cbry_values1[8] if len(cbry_values1) > 8 else 0,
+            'load_2inra': cbry_values1[5] if len(cbry_values1) > 5 else 0,
+            'load5_infra': cbry_values1[8] if len(cbry_values1) > 8 else 0,
         }
         
       

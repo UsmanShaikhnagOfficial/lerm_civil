@@ -1849,13 +1849,13 @@
 								CBR at 2.5mm Penetration = (PT/PS) X 100
 							</div>
 							<div>
-								From Graph PT = <span t-esc="load2"/>
+								From Graph PT = <span t-esc="load_2inra"/>
 							</div>
 							<div>
 								PS = 1370
 							</div>
 							<div>
-								CBR = <span t-esc="round(load2 / 1370 * 100 , 2)"/>
+								CBR = <span t-esc="round(load_2inra / 1370 * 100 , 2)"/>
 							</div>
 						</div>
 
@@ -1864,19 +1864,19 @@
 								CBR at 5mm Penetration = (PT/PS) X 100
 							</div>
 							<div>
-								From Graph PT = <span t-esc="load5"/>
+								From Graph PT = <span t-esc="load5_infra"/>
 							</div>
 							<div>
 								PS = 2055
 							</div>
 							<div>
-								CBR = <span t-esc="round(load5 / 2055 * 100 , 2)"/>
+								CBR = <span t-esc="round(load5_infra / 2055 * 100 , 2)"/>
 							</div>
 						</div>
 					</div>
 					
 					<div  t-if="data.soil_infra_visible "  style="margin-top: 10px;">
-						<b>Result: CBR at 2.5 mm Penetration is maximum hence CBR is <span t-esc="round(load2 / 1370 * 100 , 2)"/></b>
+						<b>Result: CBR at 2.5 mm Penetration is maximum hence CBR is <span t-esc="round(load_2inra / 1370 * 100 , 2)"/></b>
 					</div>
 
 

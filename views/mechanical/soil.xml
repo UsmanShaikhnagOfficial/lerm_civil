@@ -370,6 +370,26 @@
                     </group>
 
 
+                      <group attrs="{'invisible': [('soil_visible', '=', False)]}">
+                        <group style="width:50%; white-space: nowrap;">
+                          <field name="ps_2mm" />
+                          <field name="pt_2mm" />
+                          <field name="cbr_2mm" />
+                        </group>
+                        <group style="width:50%; white-space: nowrap;">
+                          <field name="ps_5mm" />
+                          <field name="pt_5mm" />
+                          <field name="cbr_5mm" />
+                          
+                        </group>
+
+                        
+                    </group>
+                    <group attrs="{'invisible': [('soil_visible', '=', False)]}">
+                      <field name="cbr_result" />
+                    </group>
+
+
 
 
 
@@ -400,23 +420,23 @@
                       <field name="chart_image_cbr_infra" widget="image" readonly="1"/>
                     </group>
                     
-                    <group attrs="{'invisible': [('soil_visible', '=', False)]}">
+                    <group attrs="{'invisible': [('soil_infra_visible', '=', False)]}">
                         <group style="width:50%; white-space: nowrap;">
-                          <field name="ps_2mm" />
-                          <field name="pt_2mm" />
-                          <field name="cbr_2mm" />
+                          <field name="soil_infra_ps_2mm" />
+                          <field name="soil_infra_pt_2mm" />
+                          <field name="soil_infra_cbr_2mm" />
                         </group>
                         <group style="width:50%; white-space: nowrap;">
-                          <field name="ps_5mm" />
-                          <field name="pt_5mm" />
-                          <field name="cbr_5mm" />
+                          <field name="soil_infra_ps_5mm" />
+                          <field name="soil_infra_pt_5mm" />
+                          <field name="soil_infra_cbr_5mm" />
                           
                         </group>
 
                         
                     </group>
-                    <group>
-                      <field name="cbr_result" />
+                    <group attrs="{'invisible': [('soil_infra_visible', '=', False)]}">
+                      <field name="soil_infra_cbr_result" />
                     </group>
                    
                    
