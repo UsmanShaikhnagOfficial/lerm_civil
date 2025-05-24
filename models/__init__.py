@@ -163,3 +163,4 @@ from .mechanical import concrete_cylinder
 from .report import concrete_cylinder_ds_report
 
 # from .import dash_bord
+from . import ir_sequence_inherited
