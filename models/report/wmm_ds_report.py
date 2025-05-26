@@ -387,8 +387,8 @@ class WMMReport(models.AbstractModel):
             'load2' : cbry_values[5] if cbry_values else 0,  # Access the index if cbry_values is not empty
             'load5' : cbry_values[8] if cbry_values else 0,
 
-            'load2': cbry_values1[5] if len(cbry_values1) > 5 else 0,
-            'load5': cbry_values1[8] if len(cbry_values1) > 8 else 0,
+            'load2wmm': cbry_values1[5] if len(cbry_values1) > 5 else 0,
+            'load5wmm': cbry_values1[8] if len(cbry_values1) > 8 else 0,
         }
 
 class WmmDatasheet(models.AbstractModel):

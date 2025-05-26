@@ -1023,6 +1023,60 @@ class WmmMechanical(models.Model):
     chart_image_cbr = fields.Binary("Line Chart", compute="_compute_chart_image_cbr", store=True)
 
 
+    ps_2mm = fields.Float("PS for 2.5mm",compute="_compute_ps_2mm")
+    pt_2mm = fields.Float("PT at 2.5mm",default=1370)
+    cbr_2mm = fields.Float("CBR at 2.5mm",compute="_compute_cbr_2mm")
+
+    ps_5mm = fields.Float("PS for 5mm",compute="_compute_ps_5mm")
+    pt_5mm = fields.Float("PT at 5mm",default=2055)
+    cbr_5mm = fields.Float("CBR at 5mm",compute="_compute_cbr_5mm")
+
+    cbr_result = fields.Float("CBR",compute="_compute_final_cbr")
+
+    @api.depends('cbr_table')
+    def _compute_ps_2mm(self):
+        for record in self:
+            if record.cbr_table and len(record.cbr_table) >= 6:
+                fifth_row = record.cbr_table[5] 
+                record.ps_2mm = fifth_row.load
+            else:
+                record.ps_2mm = 0
+
+
+    @api.depends('cbr_table')
+    def _compute_ps_5mm(self):
+        for record in self:
+            if record.cbr_table and len(record.cbr_table) >= 9:
+                fifth_row = record.cbr_table[8] 
+                record.ps_5mm = fifth_row.load
+            else:
+                record.ps_5mm = 0
+
+    @api.depends('pt_2mm','ps_2mm')
+    def _compute_cbr_2mm(self):
+        for record in self:
+            if record.pt_2mm != 0:
+                record.cbr_2mm = round((record.ps_2mm/record.pt_2mm)*100,2)
+            else:
+                record.cbr_2mm = 0
+
+    @api.depends('pt_5mm','ps_5mm')
+    def _compute_cbr_5mm(self):
+        for record in self:
+            if record.pt_5mm != 0:
+                record.cbr_5mm = round((record.ps_5mm/record.pt_5mm)*100,2)
+            else:
+                record.cbr_5mm = 0
+
+    @api.depends('cbr_5mm','cbr_2mm')
+    def _compute_final_cbr(self):
+        for record in self:
+            if record.cbr_5mm > record.cbr_2mm:
+                record.cbr_result = record.cbr_5mm
+            else:
+                record.cbr_result = record.cbr_2mm
+
+
     def generate_line_chart_cbr(self):
         # Prepare data for the chart
         x_values = []
@@ -1067,6 +1121,59 @@ class WmmMechanical(models.Model):
     
     wmm_infra_table = fields.One2many('mechanical.wmm.infra.cbr.line','parent_id',string="CBR")
     chart_image_cbr_infra = fields.Binary("Line Chart", compute="_compute_chart_image_cbr_infra_wmm", store=True)
+
+    wmm_infra_ps_2mm = fields.Float("PS for 2.5mm",compute="_compute_ps_2mm_wmm_infra_ps")
+    wmm_infra_pt_2mm = fields.Float("PT at 2.5mm",default=1370)
+    wmm_infra_cbr_2mm = fields.Float("CBR at 2.5mm",compute="_compute_cbr_2mm_infra")
+
+    wmm_infra_ps_5mm = fields.Float("PS for 5mm",compute="_compute_ps_5mm_infra")
+    wmm_infra_pt_5mm = fields.Float("PT at 5mm",default=2055)
+    wmm_infra_cbr_5mm = fields.Float("CBR at 5mm",compute="_compute_cbr_5mm_infra")
+
+    wmm_infra_cbr_result = fields.Float("CBR",compute="_compute_final_cbr_infra")
+
+    @api.depends('wmm_infra_table')
+    def _compute_ps_2mm_wmm_infra_ps(self):
+        for record in self:
+            if record.wmm_infra_table and len(record.wmm_infra_table) >= 6:
+                fifth_row1 = record.wmm_infra_table[5] 
+                record.wmm_infra_ps_2mm = fifth_row1.load1
+            else:
+                record.wmm_infra_ps_2mm = 0
+
+
+    @api.depends('wmm_infra_table')
+    def _compute_ps_5mm_infra(self):
+        for record in self:
+            if record.wmm_infra_table and len(record.wmm_infra_table) >= 9:
+                fifth_row = record.wmm_infra_table[8] 
+                record.wmm_infra_ps_5mm = fifth_row.load1
+            else:
+                record.wmm_infra_ps_5mm = 0
+
+    @api.depends('wmm_infra_pt_2mm','wmm_infra_ps_2mm')
+    def _compute_cbr_2mm_infra(self):
+        for record in self:
+            if record.wmm_infra_pt_2mm != 0:
+                record.wmm_infra_cbr_2mm = round((record.wmm_infra_ps_2mm/record.wmm_infra_pt_2mm)*100,2)
+            else:
+                record.wmm_infra_cbr_2mm = 0
+
+    @api.depends('wmm_infra_pt_5mm','wmm_infra_ps_5mm')
+    def _compute_cbr_5mm_infra(self):
+        for record in self:
+            if record.wmm_infra_pt_5mm != 0:
+                record.wmm_infra_cbr_5mm = round((record.wmm_infra_ps_5mm/record.wmm_infra_pt_5mm)*100,2)
+            else:
+                record.wmm_infra_cbr_5mm = 0
+
+    @api.depends('wmm_infra_cbr_5mm','wmm_infra_cbr_2mm')
+    def _compute_final_cbr_infra(self):
+        for record in self:
+            if record.wmm_infra_cbr_5mm > record.wmm_infra_cbr_2mm:
+                record.wmm_infra_cbr_result = record.wmm_infra_cbr_5mm
+            else:
+                record.wmm_infra_cbr_result = record.wmm_infra_cbr_2mm
 
 
     def wmm_line_chart_cbr_infra(self):
