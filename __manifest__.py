@@ -71,7 +71,7 @@
     'views/chemical/fine_aggregate.xml',
     'views/mechanical/paver_block.xml',
     'views/ndt/crack_width.xml',
-    'views/ndt/concrete_core.xml',
+    'views/mechanical/concrete_core.xml',
     'views/ndt/crack_depth.xml',
     'views/ndt/acil_crack_depth.xml',
     'views/ndt/cover_meter.xml',
@@ -262,7 +262,9 @@
     'reports/concrete_cube_density/cube_density_report.xml',
     'views/mechanical/concrete_cylinder.xml',
     'reports/concrete_cylinder/concrete_cylinder_datasheet.xml',
-    'reports/concrete_cylinder/concrete_cylinder_report.xml'
+    'reports/concrete_cylinder/concrete_cylinder_report.xml',
+    'reports/concrete_core_report.xml',
+    'views/mechanical/concrete_core1.xml'
 
 
     # 'views/portal_template.xml'

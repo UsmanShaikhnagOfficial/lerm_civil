@@ -8,7 +8,17 @@ class ConcreteCore(models.Model):
     _rec_name = "name"
 
     name = fields.Char("Name",default="Concrete Core")
-   
+
+    parameter_id = fields.Many2one('eln.parameters.result', string="Parameter")
+
+    sample_parameters = fields.Many2many('lerm.parameter.master',string="Parameters",compute="_compute_sample_parameters",store=True)
+    eln_ref = fields.Many2one('lerm.eln',string="Eln")
+    tests = fields.Many2many("mechanical.gypsum.test",string="Tests")
+    grade = fields.Many2one('lerm.grade.line',string="Grade",compute="_compute_grade_id",store=True)
+
+
+
+    # dimension_visible = fields.Boolean(compute="_compute_visible")
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
     temperature = fields.Float("Temperature °C")
     child_lines = fields.One2many('ndt.concrete.core.line','parent_id',string="Parameter")
@@ -16,19 +26,6 @@ class ConcreteCore(models.Model):
     structure = fields.Char("Structure")
 
     notes = fields.One2many('ndt.concrete.core.notes','parent_id',string="Notes")
-
-
-    @api.depends('eln_ref')
-    def _compute_grade_id(self):
-        if self.eln_ref:
-            self.grade = self.eln_ref.grade_id.id
-
-
-
-   
-
-
-    
 
 
 
@@ -45,6 +42,30 @@ class ConcreteCore(models.Model):
     # temperature = fields.Float("Temperature °C")
     # structure = fields.Char("Structure")
 
+     
+
+    @api.depends('eln_ref')
+    def _compute_sample_parameters(self):
+        for record in self:
+            records = record.eln_ref.parameters_result.parameter.ids
+            record.sample_parameters = records
+            print("Records",records)
+
+    def get_all_fields(self):
+        record = self.env['ndt.concrete.core'].browse(self.ids[0])
+        field_values = {}
+        for field_name, field in record._fields.items():
+            field_value = record[field_name]
+            field_values[field_name] = field_value
+
+        return field_values
+
+    @api.depends('eln_ref')
+    def _compute_grade_id(self):
+        if self.eln_ref:
+            self.grade = self.eln_ref.grade_id.id
+
+    
 
    
     @api.model

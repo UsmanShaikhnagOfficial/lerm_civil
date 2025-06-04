@@ -80,7 +80,7 @@ from .ndt import acilcrackdepth
 from .ndt import covermeter
 from .ndt import carbonation
 from .ndt import rebound_hammer
-from .ndt import concrete_core
+from .mechanical import concrete_core
 from .ndt import crackdepth
 from .ndt import acil_upv
 from .ndt import upv
@@ -161,6 +161,8 @@ from .mechanical import concret_core_density
 from .mechanical import concrete_cube_density
 from .mechanical import concrete_cylinder
 from .report import concrete_cylinder_ds_report
+from .mechanical import concrete_core1
+from .report import concrete_core_ds_report
 
 # from .import dash_bord
 from . import ir_sequence_inherited

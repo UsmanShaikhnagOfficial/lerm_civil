@@ -2,23 +2,37 @@
 <odoo>
     <data>
 
-        <record id="concrete_core_view" model="ir.ui.view">
-        <field name="name">ndt.concrete.core.form</field>
-        <field name="model">ndt.concrete.core</field>
+        <record id="concrete_core_view1" model="ir.ui.view">
+        <field name="name">mechanical.concrete.core.form</field>
+        <field name="model">mechanical.concrete.core</field>
         <field name="arch" type="xml">
             <form>
                 <sheet>
+
+
+                  <group >
+                    <h1>
+                        <field name="name" readonly="1" nolabel="1"/>
+                    </h1>
+                    </group>
                     <group>
                         <field name="srf_id" invisible="1"/>
-                         
-                        <field name="sample_id"  readonly="1" />
-                        <field name="parameter_id"/>
+                        <field name="sample_id" readonly="1"/>
+                        <field name="eln_ref" readonly="1"/>
+                        <field name="parameter_id" invisible="1"/>
+                        <field name="grade"/>
+
                     </group>
                     <group>
-                        <h1>
-                            <field name="name" readonly="1" nolabel="1"/>
-                        </h1>
+                      <field name="sample_parameters">
+                        <tree>
+                          <field name="parameter_name"/>
+                          <field name="test_method"/>
+                        </tree>
+                      </field>
                     </group>
+                    
+                      
                     <group style="width:50%">
                         <field name="temperature" string="Temperature °C" identity="extra"/>
                         <field name="structure" string="Structure Age" identity="extra"/>

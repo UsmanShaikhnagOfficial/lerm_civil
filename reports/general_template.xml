@@ -137,43 +137,15 @@
 								</td>
 							</tr>
 							
-							<!-- <tr style="height:50px" cols="12">
-								<td colspan="4">Performed By :
-									<![CDATA[&nbsp;]]>
-									<span t-field="o.technician.name"/>
-								</td>
-								<td colspan="4">Witness Name :
-									<![CDATA[&nbsp;]]>
-									<span t-field="o.witness_name"/>
-								</td>
-								<td colspan="4">Witness Signature :
-									<![CDATA[&nbsp;]]>
-									<span style='padding:20px'></span>
-								</td>
-							</tr> -->
+							
 						</table>
 					</div>
 
-					<!-- <table style="margin-top:30px;" t-foreach="data" t-as="formdata" t-if="extradata and len(extradata) &gt; 0">
-						<tr cols="12">
-							<td colspan="6" t-foreach="extradata" t-as="result">
-								<span>
-									<t t-esc="result[1]"/>
-								</span> : 
-								<![CDATA[&nbsp;]]>
-								<span>
-									<t t-esc="formdata[result[0]]" />
-								</span>
-							</td>
-						</tr>
-					</table> -->
-
-					<table style="margin-top:30px;">
+					
+					<!-- <table style="margin-top:30px;">
 						<thead>
 							<tr>
-								<!-- <th>
-									<div>SR.No</div>
-								</th> -->
+							
 								<t t-foreach="tabledata" t-as="column">
 									<th>
 										<span>
@@ -183,38 +155,12 @@
 								</t>
 							</tr>
 						</thead>
-						<!-- <tbody>
-							<t t-set="i" t-value="0"/>
-							<tr t-foreach="data.child_lines" t-as="r">
-								<td>
-									<div>
-									<span t-esc="i + 1" />
-									<t t-set="i" t-value="i+1"/>
-									</div>
-								</td>
-								<t t-foreach="tabledata" t-as="row">
-									<td>
-										<span>
-											<t t-esc="r[row[0]]"/>
-										</span>
-									</td>
-								</t>
-							</tr>
-						</tbody> -->
-
+					
 						<tbody>
 							<tr t-foreach="data.child_lines" t-as="r">
 								<t t-foreach="tabledata" t-as="row">
 									<td>
-									<!-- <span>
-										<t t-if="str(r[row[0]]).replace('.', '', 1).isdigit()">
-											<t t-esc="round(float(r[row[0]]),2)"/>
-										</t>
-										<t t-else="">
-											<t t-esc="r[row[0]]"/>
-										</t>
-									</span> -->
-
+								
 
 									<span>
 										<t t-if="str(r[row[0]]).replace('.', '', 1).isdigit()">
@@ -227,7 +173,6 @@
 
 											<t t-if="field_type.ttype == 'selection'">
 												<t t-set="selection" t-value="env['ir.model.fields.selection'].search([('field_id','=',field_type.id),('value','=',r[row[0]])])"/>
-												<!-- <span>Selection </span> -->
 												
 												<t t-esc="selection.name"/>
 											</t>
@@ -250,10 +195,195 @@
 									<t t-esc="result[1]"/>
 								</span> : 
 								<![CDATA[&nbsp;]]>
-								<!-- <span>
-									<t t-esc="formdata[result[0]]" />
-								</span> -->
+								
 								<span>
+										<t t-if="str(formdata[result[0]]).replace('.', '', 1).isdigit()">
+											<t t-esc="round(float(formdata[result[0]]),2)"/>
+										</t> 
+										<t t-else="">
+											<t t-set="model_name" t-value="str(r).split('(')[0].strip() if '(' in str(r) else str(r).strip()"/>
+											<t t-set="field_name" t-value="row[0]"/>
+											<t t-set="field_type" t-value="env['ir.model.fields'].search([('name','=',field_name),('model_id.model','=',model_name)])"/>
+
+											<t t-if="field_type.ttype == 'selection'">
+												<t t-set="selection" t-value="env['ir.model.fields.selection'].search([('field_id','=',field_type.id),('value','=',formdata[result[0]])])"/>
+												
+												<t t-esc="selection.name"/>
+											</t>
+											<t t-else="">
+
+												<t t-esc="formdata[result[0]]"/>
+											</t>
+										</t>
+									</span>
+							</td>
+						</tr>
+					</table> -->
+
+					<t t-set="data_length" t-value="len(data.child_lines or [])"/>
+					<t t-if="data_length &lt;= o.sample_id.page_break">
+						<table style="margin-top:15px;">
+								<thead>
+									<tr>
+										<t t-foreach="tabledata" t-as="column">
+											<th>
+												<span>
+													<t style="text-align:center;" t-esc="column[1]" />
+												</span>
+											</th>
+										</t>
+									</tr>
+								</thead>
+								
+								
+									<tbody>
+										<t t-set="i" t-value="0"/>
+										<tr t-foreach="range(len(data.child_lines))" t-as="index">
+											<t t-set="r" t-value="data.child_lines[index]"/>
+											<t t-foreach="tabledata" t-as="row">
+												<td>
+													<span style="text-align:center;">
+														<t t-if="str(r[row[0]]).replace('.', '', 1).isdigit()">
+															<t style="text-align:center;" t-esc="round(float(r[row[0]]),2)"/>
+														</t> 
+														<t t-else="">
+															<t t-set="model_name" t-value="str(r).split('(')[0].strip() if '(' in str(r) else str(r).strip()"/>
+															<t t-set="field_name" t-value="row[0]"/>
+															<t t-set="field_type" t-value="env['ir.model.fields'].search([('name','=',field_name),('model_id.model','=',model_name)])"/>
+
+															<t t-if="field_type.ttype == 'selection'">
+																<t t-set="selection" t-value="env['ir.model.fields.selection'].search([('field_id','=',field_type.id),('value','=',r[row[0]])])"/>
+																<!-- <span>Selection </span> -->
+																
+																<t style="text-align:center;" t-esc="selection.name"/>
+															</t>
+															<t t-else="">
+
+																<t style="text-align:center;" t-esc="r[row[0]]"/>
+															</t>
+														</t>
+													</span>
+												</td>
+											</t>
+										</tr>
+									</tbody>
+								
+							
+						</table>
+						
+					</t>
+					<t t-if="data_length &gt; o.sample_id.page_break">
+						<table style="margin-top:15px;">
+								<thead>
+									<tr>
+										
+										<t t-foreach="tabledata" t-as="column">
+											<th>
+												<span>
+													<t style="text-align:center;" t-esc="column[1]" />
+												</span>
+											</th>
+										</t>
+									</tr>
+								</thead>
+								
+									<tbody>
+										<t t-set="i" t-value="0"/>
+										<tr t-foreach="range(o.sample_id.page_break)" t-as="index">
+											<t t-set="r" t-value="data.child_lines[index]"/>
+											<t t-foreach="tabledata" t-as="row">
+												<td>
+													<span>
+														<t t-if="str(r[row[0]]).replace('.', '', 1).isdigit()">
+															<t style="text-align:center;" t-esc="round(float(r[row[0]]),2)"/>
+														</t> 
+														<t t-else="">
+															<t t-set="model_name" t-value="str(r).split('(')[0].strip() if '(' in str(r) else str(r).strip()"/>
+															<t t-set="field_name" t-value="row[0]"/>
+															<t t-set="field_type" t-value="env['ir.model.fields'].search([('name','=',field_name),('model_id.model','=',model_name)])"/>
+
+															<t t-if="field_type.ttype == 'selection'">
+																<t t-set="selection" t-value="env['ir.model.fields.selection'].search([('field_id','=',field_type.id),('value','=',r[row[0]])])"/>
+																<!-- <span>Selection </span> -->
+																
+																<t style="text-align:center;" t-esc="selection.name"/>
+															</t>
+															<t t-else="">
+
+																<t style="text-align:center;" t-esc="r[row[0]]"/>
+															</t>
+														</t>
+													</span>
+												</td>
+											</t>
+										</tr>
+									</tbody>
+					   </table>
+						
+					<div style="page-break-before: always;"></div>
+					  <table style="margin-top:15px;">
+								<thead>
+									<tr>
+										
+										<t t-foreach="tabledata" t-as="column">
+											<th>
+												<span>
+													<t style="text-align:center;" t-esc="column[1]" />
+												</span>
+											</th>
+										</t>
+									</tr>
+								</thead>
+								
+									<tbody>
+										<t t-set="i" t-value="0"/>
+										<tr t-foreach="range(o.sample_id.page_break, len(data.child_lines))" t-as="index">
+											<t t-set="r" t-value="data.child_lines[index]"/>
+											<t t-foreach="tabledata" t-as="row">
+												<td>
+													<span>
+														<t t-if="str(r[row[0]]).replace('.', '', 1).isdigit()">
+															<t style="text-align:center;" t-esc="round(float(r[row[0]]),2)"/>
+														</t> 
+														<t t-else="">
+															<t t-set="model_name" t-value="str(r).split('(')[0].strip() if '(' in str(r) else str(r).strip()"/>
+															<t t-set="field_name" t-value="row[0]"/>
+															<t t-set="field_type" t-value="env['ir.model.fields'].search([('name','=',field_name),('model_id.model','=',model_name)])"/>
+
+															<t t-if="field_type.ttype == 'selection'">
+																<t t-set="selection" t-value="env['ir.model.fields.selection'].search([('field_id','=',field_type.id),('value','=',r[row[0]])])"/>
+																<!-- <span>Selection </span> -->
+																
+																<t style="text-align:center;" t-esc="selection.name"/>
+															</t>
+															<t t-else="">
+
+																<t style="text-align:center;" t-esc="r[row[0]]"/>
+															</t>
+														</t>
+													</span>
+												</td>
+											</t>
+										</tr>
+									</tbody>
+						</table>
+						
+					</t>
+					
+
+				<div style="page-break-inside: avoid;">
+					<table style="margin-top:10px;" t-foreach="data" t-as="formdata" t-if="resultdata and len(resultdata) &gt; 0">
+							<tr cols="12">
+								<td colspan="6" t-foreach="resultdata" t-as="result">
+									<span>
+										<t t-esc="result[1]"/>
+									</span> : 
+									<![CDATA[&nbsp;]]>
+									<!-- <span>
+										<t t-esc="formdata[result[0]]" />
+										
+									</span> -->
+									<span>
 										<t t-if="str(formdata[result[0]]).replace('.', '', 1).isdigit()">
 											<t t-esc="round(float(formdata[result[0]]),2)"/>
 										</t> 
@@ -274,9 +404,10 @@
 											</t>
 										</t>
 									</span>
-							</td>
-						</tr>
-					</table>
+								</td>
+							</tr>
+						</table>
+					</div>
 
 
 					
