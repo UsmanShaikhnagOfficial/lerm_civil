@@ -765,7 +765,7 @@
 
 						</tr>
 
-						<tr t-if="data.shock_resisrance_visible ">
+						<tr t-if="data.soft_light_visible ">
                             <td colspan="1">
 								<div>
 									<span t-esc="i + 1" />
@@ -774,7 +774,7 @@
                   			</td>
                             <td>
 								<span>
-									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','9a7d5d91-6397-4ffe-bd3c-dab180427cbb')]).parameter_name"/>
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','21547ghtd-f463-4129-a75a-091ebfc79eb3')]).parameter_name"/>
 								</span>
 							</td>
                                <td>
@@ -783,12 +783,12 @@
                             
                             <td>
 								<span>
-									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','9a7d5d91-6397-4ffe-bd3c-dab180427cbb')]).unit.name"/>
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','21547ghtd-f463-4129-a75a-091ebfc79eb3')]).unit.name"/>
 								</span>
 							</td>
 								<td>
 								<span>
-									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','9a7d5d91-6397-4ffe-bd3c-dab180427cbb')]).parameter_table" t-as="parameter">
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','21547ghtd-f463-4129-a75a-091ebfc79eb3')]).parameter_table" t-as="parameter">
 										<t t-if="parameter.grade.id == eln.grade_id.id">
                                                 <span t-field="parameter.permissable_limit"/>
                                         </t>
@@ -797,7 +797,7 @@
 							</td>
                             <!-- <td>
 								<span>
-									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','9a7d5d91-6397-4ffe-bd3c-dab180427cbb')]).parameter_table" t-as="parameter">
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','21547ghtd-f463-4129-a75a-091ebfc79eb3')]).parameter_table" t-as="parameter">
 										<t t-if="parameter.grade.id == eln.grade_id.id">
                                                 <span t-field="parameter.specification"/>
                                         </t>
@@ -813,7 +813,7 @@
 
 						</tr>
 
-							<tr t-if="data.shock_resisrance_visible ">
+							<tr t-if="data.soft_heavy_visible ">
                             <td colspan="1">
 								<div>
 									<span t-esc="i + 1" />
@@ -822,7 +822,7 @@
                   			</td>
                             <td>
 								<span>
-									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','a2a517f3-2701-4a68-bc0f-17a06d7ac12b')]).parameter_name"/>
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','32145bng-f463-4129-a75a-091ebfc79eb3')]).parameter_name"/>
 								</span>
 							</td>
                                <td>
@@ -831,12 +831,12 @@
                             
                             <td>
 								<span>
-									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','a2a517f3-2701-4a68-bc0f-17a06d7ac12b')]).unit.name"/>
+									<span t-field="env['lerm.parameter.master'].search([('internal_id','=','32145bng-f463-4129-a75a-091ebfc79eb3')]).unit.name"/>
 								</span>
 							</td>
 								<td>
 								<span>
-									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','a2a517f3-2701-4a68-bc0f-17a06d7ac12b')]).parameter_table" t-as="parameter">
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','32145bng-f463-4129-a75a-091ebfc79eb3')]).parameter_table" t-as="parameter">
 										<t t-if="parameter.grade.id == eln.grade_id.id">
                                                 <span t-field="parameter.permissable_limit"/>
                                         </t>
@@ -845,7 +845,7 @@
 							</td>
                             <!-- <td>
 								<span>
-									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','a2a517f3-2701-4a68-bc0f-17a06d7ac12b')]).parameter_table" t-as="parameter">
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','32145bng-f463-4129-a75a-091ebfc79eb3')]).parameter_table" t-as="parameter">
 										<t t-if="parameter.grade.id == eln.grade_id.id">
                                                 <span t-field="parameter.specification"/>
                                         </t>

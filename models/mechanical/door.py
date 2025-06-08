@@ -808,7 +808,12 @@ class Door(models.Model):
     shock_resisrance_name = fields.Char("Name",default="Shock Resistance Test")
     shock_resisrance_visible = fields.Boolean("Shock Resistance Test",compute="_compute_visible")  
 
+
+    soft_light_visible = fields.Boolean("Shock Resistance Test",compute="_compute_visible")  
+
     shock_resisrance_obsrvetions1 = fields.Char(string="Soft and light body impact test")
+
+    soft_heavy_visible = fields.Boolean("Shock Resistance Test",compute="_compute_visible")  
     shock_resisrance_obsrvetions2 = fields.Char(string="soft and heavy body impact test")
 
 
@@ -1190,6 +1195,8 @@ class Door(models.Model):
             record.door_impact_visible = False
             record.edge_loading_visible = False
             record.shock_resisrance_visible = False
+            record.soft_light_visible = False
+            record.soft_heavy_visible = False
             record.bucklin_resistance_visible = False
             record.slamming_visible = False
             record.misuse_visible = False
@@ -1229,6 +1236,12 @@ class Door(models.Model):
 
                 if sample.internal_id == "92d5ed97-f463-4129-a75a-091ebfc79eb3":
                     record.shock_resisrance_visible = True
+
+                if sample.internal_id == "21547ghtd-f463-4129-a75a-091ebfc79eb3":
+                    record.soft_light_visible = True
+
+                if sample.internal_id == "32145bng-f463-4129-a75a-091ebfc79eb3":
+                    record.soft_heavy_visible = True
 
                 if sample.internal_id == "f38ae4bd-c6ac-4ebb-ac3f-ccb6c058d038":
                     record.bucklin_resistance_visible = True

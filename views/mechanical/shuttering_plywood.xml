@@ -72,6 +72,15 @@
                        
                     </group>
 
+                     <group attrs="{'invisible': [('dimensions_shuttering_visible', '=', False)]}"  style="white-space: nowrap; width:70%;">
+                        <field name='length_pecification' col="4"/>
+                         <field name='width_pecification' col="4"/>
+                        <field name='thickness_pecification' col="4"/>
+                        <field name='squareness_pecification' col="4"/>
+                         <field name='edge_straightness_pecification' col="4"/>
+                       
+                    </group>
+
                     <group attrs="{'invisible': [('dimensions_shuttering_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
 
                      <group style="width:25%" attrs="{'invisible': [('dimensions_shuttering_visible', '=', False)]}">
@@ -181,6 +190,12 @@
                        
                     </group>
 
+                    <group attrs="{'invisible': [('adhesion_plies_visible', '=', False)]}"  style="white-space: nowrap; width:70%;">
+                        <field name='adhesion_plies_pecification' col="4"/>
+                       
+                       
+                    </group>
+
 
 
                        <!--  Resistance to dry heat-->
@@ -203,6 +218,12 @@
                        
                     </group>
 
+                     <group attrs="{'invisible': [('resistance_heat_visible', '=', False)]}"  style="white-space: nowrap; width:70%;">
+                        <field name='resistance_heat_pecification' col="4"/>
+                       
+                       
+                    </group>
+
 
 
                        <!--  Water Resistance Test-->
@@ -221,6 +242,13 @@
 
                     <group attrs="{'invisible': [('water_resistance_visible', '=', False)]}"  style="white-space: nowrap; width:70%;">
                         <field name='water_resistance' col="4"/>
+                       
+                       
+                    </group>
+
+
+                    <group attrs="{'invisible': [('water_resistance_visible', '=', False)]}"  style="white-space: nowrap; width:70%;">
+                        <field name='water_resistance_pecification' col="4"/>
                        
                        
                     </group>
@@ -259,6 +287,11 @@
 
                     <group attrs="{'invisible': [('density_shuttering_visible', '=', False)]}"  style="white-space: nowrap; width:70%;">
                         <field name='average_density_shuttering' col="4"/>
+                       
+                    </group>
+
+                    <group attrs="{'invisible': [('density_shuttering_visible', '=', False)]}"  style="white-space: nowrap; width:70%;">
+                        <field name='density_shuttering_pecification' col="4"/>
                        
                     </group>
 

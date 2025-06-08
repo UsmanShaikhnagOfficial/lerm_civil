@@ -38,6 +38,12 @@ class ShutteringPlywood(models.Model):
     average_thickness = fields.Float(string="Average Thickness, mm", compute="_compute_average_thickness_shuttering",digits=(12,2))
     average_squareness = fields.Float(string="Average Squareness, mm", compute="_compute_average_squareness_shuttering",digits=(12,4))
     average_edge_straightness = fields.Float(string="Average Edge Straightness, mm", compute="_compute_average_edge_straightness_shuttering",digits=(12,4))
+
+    length_pecification = fields.Char("Length Specification")
+    width_pecification = fields.Char("Width Specification")
+    thickness_pecification = fields.Char("Thickness Specification")
+    squareness_pecification = fields.Char("Squareness Specification")
+    edge_straightness_pecification = fields.Char("Edge Straightness Specification")
  
     @api.depends('child_lines_dimensions_shuttering.lenght')
     def _compute_average_length_shuttering(self):
@@ -379,6 +385,8 @@ class ShutteringPlywood(models.Model):
 
     adhesion_plies = fields.Char(string="Observation")
 
+    adhesion_plies_pecification = fields.Char("Adhesion of Plies Specification")
+
 
         #Resistance to dry heat
 
@@ -386,6 +394,8 @@ class ShutteringPlywood(models.Model):
     resistance_heat_visible = fields.Boolean("Resistance to Dry Heat Visible",compute="_compute_visible") 
 
     resistance_heat = fields.Char(string="Observation")
+
+    resistance_heat_pecification = fields.Char("Resistance to Dry Heat Specification")
 
 
 
@@ -395,6 +405,8 @@ class ShutteringPlywood(models.Model):
     water_resistance_visible = fields.Boolean("Water Resistance Test Visible",compute="_compute_visible") 
 
     water_resistance = fields.Char(string="Observation")
+
+    water_resistance_pecification = fields.Char("Water Resistance Specification")
 
 
 
@@ -409,6 +421,8 @@ class ShutteringPlywood(models.Model):
     child_lines_density_shuttering = fields.One2many('mechanical.density.huttering.line','parent_id',string="Parameter")
 
     average_density_shuttering = fields.Float(string="Density, g/cm3 ",compute="_compute_average_gypsum_density_shuttering",digits=(12,3),store=True)
+
+    density_shuttering_pecification = fields.Char("Density Specification")
 
     @api.depends('child_lines_density_shuttering.density_shuttering')
     def _compute_average_gypsum_density_shuttering(self):

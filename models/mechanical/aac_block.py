@@ -114,7 +114,7 @@ class AacBlockMechanical(models.Model):
 
     dimension_table = fields.One2many('mech.aac.dimension.line','parent_id')
     average_length = fields.Float('Average Length',compute="_compute_average_length")
-    length_grade1 = fields.Char("Length pecification Grade - 1")
+    length_grade1 = fields.Char("Length Specification Grade - 1")
     length_grade2 = fields.Char("Length Specification Grade - 2")
 
     average_width = fields.Float('Average Width',compute="_compute_average_width")
