@@ -171,7 +171,7 @@
 
 
 						<!-- field density -->
-						<div style="page-break-inside: avoid; margin-top: 20px;">
+						<div style="page-break-inside: avoid; margin-top: 5px;">
 							<table t-if="data.field_density_visible" style="width:100%; border-collapse: collapse;">
 								<tr>
 									<td colspan="4" style="text-align:center; letter-spacing: 2px; border: 1px solid black; padding: 10px;">
@@ -1742,7 +1742,7 @@
 
 
 
-					<div  style="page-break-inside: avoid;margin-top:20px">
+					<div  >
 						<table t-if="data.soil_infra_visible">
 								<tr>
 									<div style="text-align:center;letter-spacing : 2px;border:1px solid black;padding:10px">
