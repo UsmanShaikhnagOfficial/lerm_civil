@@ -161,6 +161,7 @@ class AacBlockMechanical(models.Model):
     # Moisture Content
     moisture_name = fields.Char(default="Moisture Content")
     moisture_visible = fields.Boolean(compute="_compute_visible")
+    
     moisture_grade1 = fields.Char("Specification Grade - 1")
     moisture_grade2 = fields.Char("Specification Grade - 2")
 

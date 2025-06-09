@@ -66,7 +66,7 @@
                             <field name="length_grade1"/>
                              <field name="length_grade2"/>
                     
-                        </group>
+                        </group >
 
                            <group  style="white-space: nowrap; width:70%;">
                             <field name="width_grade1"/>
@@ -154,7 +154,7 @@
                             <field name="density_nabl"/>
                         </group>
                     </group>
-                    <group attrs="{'invisible': [('moisture_visible', '=', False)]}">
+                    <group attrs="{'invisible': [('density_visible', '=', False)]}">
                         <group style="white-space: nowrap; width:70%;">
                             <field name="density_grade1"/>
                              <field name="density_grade2"/>
@@ -230,7 +230,7 @@
                         </group>
                  
                     </group>
-                    <group attrs="{'invisible': [('drying_shrinkage_visible', '=', False)]}">
+                    <group attrs="{'invisible': [('compressive_strength_visible', '=', False)]}">
                         <group style="white-space: nowrap; width:70%;">
                             <field name="compressive_grade1"/>
                              <field name="compressive_grade2"/>
