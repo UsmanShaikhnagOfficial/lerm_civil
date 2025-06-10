@@ -1771,24 +1771,7 @@
 											</span>
 										</th>
 
-										<th>
-											<span>
-												Proving Ring Reading 1
-											</span>
-										</th>
-
-										<th>
-											<span>
-												Proving Ring Reading 2
-											</span>
-										</th>
-
-										<th>
-											<span>
-												Proving Ring Reading 3
-											</span>
-										</th>
-
+									
 										<th>
 											<span>
 												Proving Ring Reading Avg.
@@ -1814,15 +1797,7 @@
 										<td>
 											<span t-esc="r.penetration1" t-options='{"widget": "float", "precision": 2}'/>
 										</td>
-										<td>
-											<span t-esc="r.proving_reading1" t-options='{"widget": "float", "precision": 2}'/>
-										</td>
-										<td>
-											<span t-esc="r.proving_reading2" t-options='{"widget": "float", "precision": 2}'/>
-										</td>
-										<td>
-											<span t-esc="r.proving_reading3" t-options='{"widget": "float", "precision": 2}'/>
-										</td>
+										
 										<td>
 											<span t-esc="r.proving_reading_avg" />
 										</td>

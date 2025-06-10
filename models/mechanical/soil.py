@@ -1346,7 +1346,7 @@ class SoilInfraCBRLine(models.Model):
     proving_reading1 = fields.Float(string="Proving Ring Reading 1")
 
     proving_reading2 = fields.Float(string="Proving Ring Reading 2")
-    proving_reading3 = fields.Float(string="Proving Ring Reading 2")
+    proving_reading3 = fields.Float(string="Proving Ring Reading 3")
 
     proving_reading_avg = fields.Integer(string="Proving Ring Reading Avg.",compute="_compute_avg_reading")
 

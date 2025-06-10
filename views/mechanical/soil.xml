@@ -407,7 +407,7 @@
                           <field name="penetration1"/>
                           <field name="proving_reading1"/>
                            <field name="proving_reading2"/>
-                            <field name="proving_reading3"/>
+                            <field name="proving_reading3" string="Proving Ring Reading 3"/>
                            
                             <field name="proving_reading_avg"/>
                           <field name="load1"/>
